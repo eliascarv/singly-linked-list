@@ -1,19 +1,25 @@
 use std::fmt;
 
+// Types
+
+#[derive(Debug, Clone)]
 struct Node<T> {
     data: T,
     next: Option<Box<Node<T>>>,
 }
 
+#[derive(Debug, Clone)]
+struct List<T> {
+    head: Option<Box<Node<T>>>,
+    len: usize,
+}
+
+// Default methods
+
 impl<T> Node<T> {
     fn new(data: T) -> Node<T> {
         Node { data, next: None }
     }
-}
-
-struct List<T> {
-    head: Option<Box<Node<T>>>,
-    len: usize,
 }
 
 impl<T> List<T> {
@@ -47,6 +53,8 @@ impl<T> List<T> {
         }
     }
 }
+
+// Trait implementations
 
 impl<T> Iterator for List<T> {
     type Item = T;
