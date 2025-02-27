@@ -48,6 +48,14 @@ impl<T> List<T> {
     }
 }
 
+impl<T> Iterator for List<T> {
+    type Item = T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.pop()
+    }
+}
+
 impl<T: fmt::Display> fmt::Display for List<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "[")?;
@@ -73,6 +81,7 @@ fn main() {
     list.push(3);
     list.push(4);
     println!("List: {}", &list);
-    list.pop();
-    println!("List: {}", &list);
+    for (i, item) in list.enumerate() {
+        println!("Item {}: {}", i, item)
+    }
 }
