@@ -35,6 +35,17 @@ impl<T> List<T> {
         }
         self.len += 1;
     }
+
+    fn pop(&mut self) -> Option<T> {
+        match self.head.take() {
+            None => None,
+            Some(mut head) => {
+                self.head = head.next.take();
+                self.len -= 1;
+                Some(head.data)
+            }
+        }
+    }
 }
 
 impl<T: fmt::Display> fmt::Display for List<T> {
@@ -60,5 +71,8 @@ fn main() {
     list.push(1);
     list.push(2);
     list.push(3);
-    println!("List: {}", list);
+    list.push(4);
+    println!("List: {}", &list);
+    list.pop();
+    println!("List: {}", &list);
 }
