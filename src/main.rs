@@ -69,7 +69,7 @@ impl<T: fmt::Display> fmt::Display for List<T> {
         write!(f, "[")?;
         let mut i = 0;
         let mut current = &self.head;
-        while let Some(ref node) = current {
+        while let Some(node) = current {
             i += 1;
             if i == self.len {
                 write!(f, "{}", node.data)?;
