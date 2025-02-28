@@ -17,14 +17,14 @@ struct List<T> {
 // Default methods
 
 impl<T> Node<T> {
-    fn new(data: T) -> Node<T> {
-        Node { data, next: None }
+    fn new(data: T) -> Self {
+        Self { data, next: None }
     }
 }
 
 impl<T> List<T> {
-    fn new() -> List<T> {
-        List { head: None, len: 0 }
+    fn new() -> Self {
+        Self { head: None, len: 0 }
     }
 
     fn push(&mut self, data: T) {
