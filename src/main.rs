@@ -14,7 +14,7 @@ struct List<T> {
     len: usize,
 }
 
-// Default methods
+// Methods
 
 impl<T> Node<T> {
     fn new(data: T) -> Self {
