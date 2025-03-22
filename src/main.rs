@@ -2,15 +2,17 @@ use std::fmt;
 
 // Types
 
+type Link<T> = Option<Box<Node<T>>>;
+
 #[derive(Debug, Clone)]
 struct Node<T> {
     data: T,
-    next: Option<Box<Node<T>>>,
+    next: Link<T>,
 }
 
 #[derive(Debug, Clone)]
 struct List<T> {
-    head: Option<Box<Node<T>>>,
+    head: Link<T>,
     len: usize,
 }
 
