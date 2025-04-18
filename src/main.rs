@@ -29,7 +29,7 @@ impl<T> List<T> {
         Self { head: None, len: 0 }
     }
 
-    fn push(&mut self, data: T) {
+    fn push_back(&mut self, data: T) {
         let new_node = Box::new(Node::new(data));
         match self.head {
             None => self.head = Some(new_node),
@@ -44,15 +44,19 @@ impl<T> List<T> {
         self.len += 1;
     }
 
+    fn push_front(&mut self, data: T) {
+        let mut new_node = Box::new(Node::new(data));
+        new_node.next = self.head.take();
+        self.head = Some(new_node);
+        self.len += 1;
+    }
+
     fn pop(&mut self) -> Option<T> {
-        match self.head.take() {
-            None => None,
-            Some(mut head) => {
-                self.head = head.next.take();
-                self.len -= 1;
-                Some(head.data)
-            }
-        }
+        self.head.take().map(|node| {
+            self.head = node.next;
+            self.len -= 1;
+            node.data
+        })
     }
 }
 
@@ -86,10 +90,11 @@ impl<T: fmt::Display> fmt::Display for List<T> {
 
 fn main() {
     let mut list = List::new();
-    list.push(1);
-    list.push(2);
-    list.push(3);
-    list.push(4);
+    list.push_back(1);
+    list.push_back(2);
+    list.push_back(3);
+    list.push_back(4);
+    list.push_front(0);
     println!("List: {}", &list);
     for (i, item) in list.enumerate() {
         println!("Item {}: {}", i, item)
